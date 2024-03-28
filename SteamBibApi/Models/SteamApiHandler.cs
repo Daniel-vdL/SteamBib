@@ -29,7 +29,6 @@ namespace SteamBibApi.Models
 
             return JsonSerializer.Deserialize<RootObject>(content, options);
 
-
         }
     }
 }

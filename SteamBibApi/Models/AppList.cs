@@ -2,17 +2,17 @@
 {
     public class App
     {
-        public int appid { get; set; }
-        public string name { get; set; }
+        public int Appid { get; set; }
+        public string Name { get; set; }
     }
 
     public class AppList
     {
-        public List<App> apps { get; set; }
+        public List<App> Apps { get; set; }
     }
 
     public class RootObject
     {
-        public AppList applist { get; set; }
+        public AppList Applist { get; set; }
     }
 }

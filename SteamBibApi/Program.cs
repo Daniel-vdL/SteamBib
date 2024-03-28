@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using SteamBibApi.Models;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,9 +30,31 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-var steamApiHandler = new SteamApiHandler();
-var appList = await steamApiHandler.GetAppsAsync();
+db.SteamApps.ExecuteDelete();
 
-db.Apps.ExecuteDelete();
+//await FillSteamApps();
 
 app.Run();
+
+//async Task FillSteamApps()
+//{
+//    var steamApiHandler = new SteamApiHandler();
+//    var appList = await steamApiHandler.GetAppsAsync();
+
+//    foreach (var apps in appList.Applist.Apps)
+//    {
+//        var name = apps.Name;
+//        var appId = apps.Appid;
+//        var steamApp = new SteamApp
+//        {
+//            Appid = apps.Appid,
+//            Name = apps.Name
+//        };
+
+//        db.SteamApps.Add(steamApp);
+//    }
+
+//    await db.SaveChangesAsync();
+
+//    Console.WriteLine("Steam apps data filled successfully.");
+//}
