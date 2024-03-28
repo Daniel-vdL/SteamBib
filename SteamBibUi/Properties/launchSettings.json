@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SteamBibUi (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SteamBibUi (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
