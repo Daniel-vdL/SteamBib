@@ -13,11 +13,11 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-namespace SteamBibUi.Pages
+namespace SteamBibUi.LoginPages
 {
-    public sealed partial class DashboardPage : Page
+    public sealed partial class LoginPage : Page
     {
-        public DashboardPage()
+        public LoginPage()
         {
             this.InitializeComponent();
         }

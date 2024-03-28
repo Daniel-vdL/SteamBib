@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copy this file and change the name to App.config -->
+<!-- Input your steamKey for a connection with the SteamApi -->
+
+<configuration>
+	<appSettings>
+		<add key="steamKey"
+			 value=""/>
+	</appSettings>
+</configuration>
+
