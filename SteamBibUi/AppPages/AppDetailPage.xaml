@@ -1,0 +1,95 @@
+<Page
+    x:Class="SteamBibUi.AppPages.AppDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SteamBibUi.AppPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#36393F">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Margin="10" CornerRadius="10" BorderBrush="LightGray" BorderThickness="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- Background Image -->
+                <Image Source="{x:Bind appDetails.Background}" Stretch="UniformToFill" Opacity="0.5" Grid.RowSpan="2"/>
+
+                <!-- Content -->
+                <StackPanel Padding="20" Grid.Row="1">
+                    <!-- Game Name -->
+                    <TextBlock Text="{x:Bind appDetails.Name}" FontWeight="Bold" FontSize="28" Margin="0 0 0 10"/>
+
+                    <!-- Description -->
+                    <TextBlock Text="{x:Bind appDetails.PlainTextAboutTheGame}" TextWrapping="Wrap" FontSize="16" Margin="0 0 0 20"/>
+
+                    <!-- Genres -->
+                    <TextBlock Text="Genres:" FontWeight="Bold" FontSize="18" Margin="0 0 0 10"/>
+                    <ItemsControl ItemsSource="{x:Bind appDetails.Genres}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Description}" FontSize="16" Margin="10 0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Developers -->
+                    <TextBlock Text="Developers:" FontWeight="Bold" FontSize="18" Margin="0 0 0 10"/>
+                    <ItemsControl ItemsSource="{x:Bind appDetails.Developers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontSize="16" Margin="10 0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Publishers -->
+                    <TextBlock Text="Publishers:" FontWeight="Bold" FontSize="18" Margin="0 0 0 10"/>
+                    <ItemsControl ItemsSource="{x:Bind appDetails.Publishers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontSize="16" Margin="10 0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Release Date -->
+                    <TextBlock Text="Release Date:" FontWeight="Bold" FontSize="18" Margin="0 0 0 10"/>
+                    <TextBlock Text="{x:Bind appDetails.Release_Date.Date}" FontSize="16" Margin="10 0"/>
+
+                    <!-- Screenshots -->
+                    <TextBlock Text="Screenshots:" FontWeight="Bold" FontSize="18" Margin="0 0 0 10"/>
+                    <ItemsControl ItemsSource="{x:Bind appDetails.Screenshots}" Margin="10 0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path_Full}" Width="150" Height="100" Margin="5"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
+            <StackPanel HorizontalAlignment="Center" 
+                        Orientation="Horizontal"
+                        Grid.Row="1" >
+                <Button Margin="0 0 10 0" 
+                        x:Name="returnButton" 
+                        Click="returnButton_Click" 
+                        Content="Go Back"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

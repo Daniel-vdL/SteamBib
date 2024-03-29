@@ -12,6 +12,8 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="AppPages\AdminAppViewPage.xaml" />
+    <None Remove="AppPages\AppDetailPage.xaml" />
     <None Remove="AppPages\AppViewPage.xaml" />
     <None Remove="LoginPages\LoginPage.xaml" />
     <None Remove="LoginPages\RegistrationPage.xaml" />
@@ -43,6 +45,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AppPages\AppDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AppPages\AdminAppViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="OtherPages\AdminConsole.xaml">

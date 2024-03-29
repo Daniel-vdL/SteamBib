@@ -29,37 +29,18 @@ namespace SteamBibUi.OtherPages
         {
             try
             {
-                bool isDatabaseFilled = ApplicationData.Current.LocalSettings.Values.ContainsKey("IsDatabaseFilled");
+                var apiHandler = new ApiHandler();
+                await apiHandler.FillSteamAppsAsync();
 
-                if (isDatabaseFilled)
+                ContentDialog successDialog = new ContentDialog
                 {
-                    ContentDialog alreadyFilledDialog = new ContentDialog
-                    {
-                        Title = "Database Already Filled",
-                        Content = "Click 'Ok' to continue.",
-                        CloseButtonText = "Ok",
-                        XamlRoot = this.XamlRoot
-                    };
+                    Title = "Database Filled Successfully",
+                    Content = "The database has been successfully filled with Steam apps data.",
+                    CloseButtonText = "Ok",
+                    XamlRoot = this.XamlRoot
+                };
 
-                    await alreadyFilledDialog.ShowAsync();
-                }
-                else
-                {
-                    var apiHandler = new ApiHandler();
-                    await apiHandler.FillSteamAppsAsync();
-
-                    ApplicationData.Current.LocalSettings.Values["IsDatabaseFilled"] = true;
-
-                    ContentDialog successDialog = new ContentDialog
-                    {
-                        Title = "Database Filled Successfully",
-                        Content = "The database has been successfully filled with Steam apps data.",
-                        CloseButtonText = "Ok",
-                        XamlRoot = this.XamlRoot
-                    };
-
-                    await successDialog.ShowAsync();
-                }
+                await successDialog.ShowAsync();
             }
             catch (Exception ex)
             {

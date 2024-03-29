@@ -26,17 +26,17 @@ namespace SteamBibUi.OtherPages
 
         private void AppPageButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AppViewPage));
-        }
-
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(LoginPage));
+            this.Frame.Navigate(typeof(AdminAppViewPage));
         }
 
         private void AdminConsoleButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AdminConsolePage));
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(LoginPage));
         }
     }
 }

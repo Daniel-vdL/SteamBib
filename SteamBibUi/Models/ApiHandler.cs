@@ -40,5 +40,21 @@ namespace SteamBibUi.Models
             var response = await _client.PostAsync(url, null);
             response.EnsureSuccessStatusCode();
         }
+
+        public async Task<bool> DeleteSteamAppAsync(int id)
+        {
+            try
+            {
+                string url = $"https://localhost:7099/api/SteamApps/{id}";
+                var response = await _client.DeleteAsync(url);
+                response.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"Error deleting Steam app: {ex.Message}");
+                return false;
+            }
+        }
     }
 }
