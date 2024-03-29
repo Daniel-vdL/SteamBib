@@ -22,13 +22,24 @@ namespace SteamBibApi.Controllers
 
         // GET: api/SteamApps
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SteamApp>>> GetSteamApps()
+        public async Task<ActionResult<IEnumerable<SteamAppDto>>> GetSteamApps()
         {
-          if (_context.SteamApps == null)
-          {
-              return NotFound();
-          }
-            return await _context.SteamApps.ToListAsync();
+            var steamApps = await _context.SteamApps
+                  .ToListAsync();
+
+            var steamAppDtos = new List<SteamAppDto>();
+
+            foreach (var steamApp in steamApps)
+            {
+                steamAppDtos.Add(new SteamAppDto
+                {
+                    Id = steamApp.Id,
+                    Name = steamApp.Name,
+                    Appid = steamApp.Appid
+                });
+            }
+
+            return steamAppDtos;
         }
 
         // DELETE: api/SteamApps/5
@@ -56,12 +67,18 @@ namespace SteamBibApi.Controllers
             return (_context.SteamApps?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        // This action fills the SteamApps data
+        private static bool _isDatabaseFilled = false;
+
         [HttpPost("FillSteamApps")]
         public async Task<IActionResult> FillSteamApps()
         {
             try
             {
+                if (_isDatabaseFilled)
+                {
+                    return BadRequest("Database has already been filled.");
+                }
+
                 var steamApiHandler = new SteamApiHandler();
                 var appList = await steamApiHandler.GetAppsAsync();
 
@@ -77,6 +94,8 @@ namespace SteamBibApi.Controllers
                 }
 
                 await _context.SaveChangesAsync();
+
+                _isDatabaseFilled = true;
 
                 return Ok("Steam apps data filled successfully.");
             }

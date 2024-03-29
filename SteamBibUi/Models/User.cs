@@ -8,11 +8,11 @@ namespace SteamBibUi.Models
 {
     public class User
     {
-        public static User currentUser { get; set; }
-        public int? failedLoginAttempts { get; set; }
-        public int id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public int? statusId { get; set; }
+        public static User CurrentUser { get; set; }
+        public int? FailedLoginAttempts { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public int? StatusId { get; set; }
     }
 }

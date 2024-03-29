@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using SteamBibUi.LoginPages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,15 +13,13 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-namespace SteamBibUi
+namespace SteamBibUi.AppPages
 {
-    public sealed partial class MainWindow : Window
+    public sealed partial class AppViewPage : Page
     {
-        public MainWindow()
+        public AppViewPage()
         {
             this.InitializeComponent();
-
-            this.rootFrame.Navigate(typeof(LoginPage)); 
         }
     }
 }

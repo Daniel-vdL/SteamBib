@@ -12,7 +12,11 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="AppPages\AppViewPage.xaml" />
     <None Remove="LoginPages\LoginPage.xaml" />
+    <None Remove="LoginPages\RegistrationPage.xaml" />
+    <None Remove="OtherPages\AdminConsole.xaml" />
+    <None Remove="OtherPages\AdminDashboardPage.xaml" />
     <None Remove="OtherPages\DashboardPage.xaml" />
   </ItemGroup>
 
@@ -41,7 +45,19 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Page Update="OtherPages\AdminConsole.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="OtherPages\AdminDashboardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LoginPages\RegistrationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginPages\LoginPage.xaml">
@@ -50,6 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\DashboardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AppPages\AppViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

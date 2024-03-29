@@ -17,9 +17,9 @@ using Windows.Foundation.Collections;
 
 namespace SteamBibUi.OtherPages
 {
-    public sealed partial class DashboardPage : Page
+    public sealed partial class AdminDashboardPage : Page
     {
-        public DashboardPage()
+        public AdminDashboardPage()
         {
             this.InitializeComponent();
         }
@@ -32,6 +32,11 @@ namespace SteamBibUi.OtherPages
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(LoginPage));
+        }
+
+        private void AdminConsoleButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AdminConsolePage));
         }
     }
 }
