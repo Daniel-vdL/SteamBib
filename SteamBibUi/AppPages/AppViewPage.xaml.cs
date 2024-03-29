@@ -24,6 +24,7 @@ namespace SteamBibUi.AppPages
     {
         private List<SteamApp> steamApps;
         private List<AppDetails> AppDetailsList;
+        public AppData appDetails { get; set; }
 
         public AppViewPage()
         {

@@ -62,7 +62,6 @@ namespace SteamBibUi.AppPages
                 var appDetail = receivedContent[selectedApp.Appid.ToString()];
                 if (appDetail.Data != null && appDetail.Data.Background != null && IsImageUri(appDetail.Data.Background))
                 {
-                    // Load the details into the UI
                     appDetails = appDetail.Data;
                     Bindings.Update();
                 }
