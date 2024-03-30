@@ -41,7 +41,8 @@
         </Grid.RowDefinitions>
 
         <ListView Grid.Row="0" x:Name="AppsListView" Margin="20 20 20 0" MaxWidth="500"
-                  ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                  IsItemClickEnabled="True" ItemClick="AppsListView_ItemClick">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localData:SteamApp">
                     <StackPanel Orientation="Vertical">
@@ -63,7 +64,7 @@
                     <TextBlock Text="Go back"/>
                 </StackPanel>
             </Button>
-            <!--<Button Style="{StaticResource ButtonStyle}" x:Name="RefreshGames" Click="RefreshGames_Click">
+            <Button Style="{StaticResource ButtonStyle}" x:Name="RefreshGames" Click="RefreshGames_Click">
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Margin="0 0 5 0" Symbol="Refresh"/>
                     <TextBlock Text="Refresh"/>
@@ -71,8 +72,8 @@
             </Button>
             <StackPanel Orientation="Horizontal" Padding="15">
                 <TextBlock VerticalAlignment="Center" Margin="0 0 5 0" Text="Search:"/>
-                <TextBox MinWidth="250" MaxWidth="250" TextChanged="TextBox_TextChanged" x:Name="searchTextBox"/>
-            </StackPanel>-->
+                <TextBox MinWidth="250" MaxWidth="250" TextChanged="SearchTextBox_TextChanged" x:Name="SearchTextBox"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

@@ -82,10 +82,21 @@ namespace SteamBibApi.Controllers
                 var steamApiHandler = new SteamApiHandler();
                 var appList = await steamApiHandler.GetAppsAsync();
 
+                // Read faulty app IDs from file
+                var faultyAppIds = await ReadFaultyAppIdsFromFileAsync(@"C:\VisualStudio\SteamBib\SteamBibApi\OtherFiles\faulty_appIDs.txt");
+
                 foreach (var apps in appList.Applist.Apps)
                 {
+                    // Check if the app ID is faulty or name is empty
+                    if (faultyAppIds.Contains(apps.Appid) || string.IsNullOrEmpty(apps.Name))
+                    {
+                        // Skip this app if it's faulty or name is empty
+                        continue;
+                    }
+
                     var steamApp = new SteamApp
                     {
+                        Id = apps.Appid,
                         Appid = apps.Appid,
                         Name = apps.Name
                     };
@@ -102,6 +113,32 @@ namespace SteamBibApi.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+        private async Task<List<int>> ReadFaultyAppIdsFromFileAsync(string filePath)
+        {
+            try
+            {
+                var faultyAppIds = new List<int>();
+
+                using (var reader = new StreamReader(filePath))
+                {
+                    string line;
+                    while ((line = await reader.ReadLineAsync()) != null)
+                    {
+                        if (int.TryParse(line, out int appId))
+                        {
+                            faultyAppIds.Add(appId);
+                        }
+                    }
+                }
+
+                return faultyAppIds;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error reading faulty app IDs from file: {ex.Message}");
             }
         }
     }

@@ -26,10 +26,6 @@ namespace SteamBibApi.Models
                 modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Username = "Admin", StatusId = 1, Password = SecureHasher.Hash("1234")},
                 new User { Id = 2, Username = "User", StatusId = 0, Password = SecureHasher.Hash("1234")});
-
-                modelBuilder.Entity<SteamApp>().HasData(
-                new SteamApp { Id = 1, Appid = 1, Name = "Test" },
-                new SteamApp { Id = 2, Appid = 2, Name = "Test" });
         }
     }
 }

@@ -93,7 +93,14 @@ namespace SteamBibUi.AppPages
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AppViewPage));
+            if (User.CurrentUser.StatusId == 1)
+            {
+                this.Frame.Navigate(typeof(AdminAppViewPage));
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(AppViewPage));
+            }
         }
     }
 }

@@ -19,6 +19,8 @@ namespace SteamBibUi.AppPages
 {
     public sealed partial class AdminAppViewPage : Page
     {
+        private List<SteamApp> steamApps;
+
         public AdminAppViewPage()
         {
             this.InitializeComponent();
@@ -70,6 +72,25 @@ namespace SteamBibUi.AppPages
                     await errorDialog.ShowAsync();
                 }
             }
+        }
+
+        private void AppsListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var selectedApp = (Models.SteamApp)e.ClickedItem;
+            Frame.Navigate(typeof(AppDetailPage), selectedApp);
+        }
+
+        private void RefreshGames_Click(object sender, RoutedEventArgs e)
+        {
+            LoadApps();
+        }
+
+        public void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchInput = SearchTextBox.Text.ToLower();
+
+            var filteredApps = steamApps.Where(steamApp => steamApp.Name.ToLower().Contains(searchInput) && !string.IsNullOrEmpty(steamApp.Name)).ToList();
+            AppsListView.ItemsSource = filteredApps;
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
