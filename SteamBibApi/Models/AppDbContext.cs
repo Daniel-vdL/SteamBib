@@ -8,6 +8,7 @@ namespace SteamBibApi.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<SteamApp> SteamApps { get; set; }
+        public DbSet<SteamAppDetailsScuffed> steamAppDetailsScuffeds { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

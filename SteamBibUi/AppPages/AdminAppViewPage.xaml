@@ -40,12 +40,13 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" x:Name="AppsListView" Margin="20 20 20 0" MaxWidth="500"
+        <GridView Grid.Row="0" x:Name="AppsListView" Margin="20 20 20 0" MaxWidth="500"
                   ItemContainerStyle="{StaticResource ListViewItemStyle}"
                   IsItemClickEnabled="True" ItemClick="AppsListView_ItemClick">
-            <ListView.ItemTemplate>
+            <GridView.ItemTemplate>
                 <DataTemplate x:DataType="localData:SteamApp">
                     <StackPanel Orientation="Vertical">
+                        <Image Source="{x:Bind ImageUrl}" Stretch="UniformToFill" Opacity="0.5" Grid.RowSpan="2"/>
                         <TextBlock x:Name="nameTextBlock" Text="{x:Bind Name}" Margin="0 0 0 10"/>
                         <Button FontSize="10" DataContext="{Binding}" x:Name="DeleteApp" Click="DeleteApp_Click">
                             <StackPanel Orientation="Horizontal">
@@ -54,8 +55,8 @@
                         </Button>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </GridView.ItemTemplate>
+        </GridView>
 
         <StackPanel Style="{StaticResource StackPanelStyle}" Grid.Row="1">
             <Button Style="{StaticResource ButtonStyle}" x:Name="ReturnButton" Click="ReturnButton_Click" Margin="20 0 10 0">

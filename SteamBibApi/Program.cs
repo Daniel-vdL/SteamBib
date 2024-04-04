@@ -8,7 +8,6 @@ using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 using var db = new AppDbContext();
-db.Database.EnsureDeleted();
 db.Database.EnsureCreated();
 
 builder.Services.AddControllers();
@@ -30,7 +29,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-db.SteamApps.ExecuteDelete();
+//db.SteamApps.ExecuteDelete();
 
 //await FillSteamApps();
 

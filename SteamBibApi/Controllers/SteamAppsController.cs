@@ -9,15 +9,18 @@ using SteamBibApi.Models;
 
 namespace SteamBibApi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class SteamAppsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly HttpClient _client;
 
         public SteamAppsController(AppDbContext context)
         {
             _context = context;
+            _client = new HttpClient();
         }
 
         // GET: api/SteamApps
@@ -82,15 +85,12 @@ namespace SteamBibApi.Controllers
                 var steamApiHandler = new SteamApiHandler();
                 var appList = await steamApiHandler.GetAppsAsync();
 
-                // Read faulty app IDs from file
                 var faultyAppIds = await ReadFaultyAppIdsFromFileAsync(@"C:\VisualStudio\SteamBib\SteamBibApi\OtherFiles\faulty_appIDs.txt");
 
                 foreach (var apps in appList.Applist.Apps)
                 {
-                    // Check if the app ID is faulty or name is empty
                     if (faultyAppIds.Contains(apps.Appid) || string.IsNullOrEmpty(apps.Name))
                     {
-                        // Skip this app if it's faulty or name is empty
                         continue;
                     }
 
@@ -98,7 +98,7 @@ namespace SteamBibApi.Controllers
                     {
                         Id = apps.Appid,
                         Appid = apps.Appid,
-                        Name = apps.Name
+                        Name = apps.Name,
                     };
 
                     _context.SteamApps.Add(steamApp);

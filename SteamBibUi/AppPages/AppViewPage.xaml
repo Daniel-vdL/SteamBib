@@ -46,7 +46,18 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localData:SteamApp">
                     <StackPanel>
+                        <Image Source="{x:Bind ImageUrl}" Stretch="UniformToFill" Opacity="0.5" Grid.RowSpan="2"/>
                         <TextBlock x:Name="nameTextBlock" Text="{x:Bind Name}" Margin="0 0 0 10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Genres:" Margin="0 0 0 10"/>
+                            <ItemsControl ItemsSource="{x:Bind Genres}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" FontSize="16" Margin="10 0"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

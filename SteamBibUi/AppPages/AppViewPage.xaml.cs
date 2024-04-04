@@ -9,6 +9,7 @@ using SteamBibUi.Models;
 using SteamBibUi.OtherPages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -22,7 +23,7 @@ namespace SteamBibUi.AppPages
 {
     public sealed partial class AppViewPage : Page
     {
-        private List<SteamApp> steamApps;
+        private ObservableCollection<SteamApp> steamApps;
         private List<AppDetails> AppDetailsList;
         public AppData appDetails { get; set; }
 
@@ -35,10 +36,16 @@ namespace SteamBibUi.AppPages
         public async void LoadApps()
         {
             var apiHandler = new ApiHandler();
-            steamApps = await apiHandler.GetSteamAppsAsync();
+            var getAppDetails = new GetAppDetails();
+            steamApps = new ObservableCollection<SteamApp>(await apiHandler.GetSteamAppsAsync());
+
+            foreach (var steamApp in steamApps)
+            {
+                await getAppDetails.PopulateGenresAsync(steamApp);
+            }
 
             var filteredApps = steamApps.Where(steamApp => !string.IsNullOrEmpty(steamApp.Name)).ToList();
-            AppsListView.ItemsSource = filteredApps;
+            AppsListView.ItemsSource = new ObservableCollection<SteamApp>(filteredApps);
         }
 
         private void AppsListView_ItemClick(object sender, ItemClickEventArgs e)
