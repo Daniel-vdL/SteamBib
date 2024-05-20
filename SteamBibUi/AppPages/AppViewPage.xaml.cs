@@ -23,6 +23,7 @@ namespace SteamBibUi.AppPages
 {
     public sealed partial class AppViewPage : Page
     {
+        private Dictionary<string, string> genres;
         private ObservableCollection<SteamApp> steamApps;
         private List<AppDetails> AppDetailsList;
         public AppData appDetails { get; set; }
@@ -31,6 +32,20 @@ namespace SteamBibUi.AppPages
         {
             this.InitializeComponent();
             LoadApps();
+            LoadGenres();
+        }
+
+        private void LoadGenres()
+        {
+            string jsonFilePath = @"C:\VisualStudio\SteamBib\SteamBibApi\OtherFiles\genres.json";
+            string json = File.ReadAllText(jsonFilePath);
+            genres = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+
+            // Populate ComboBox with genres
+            foreach (var genre in genres.Values)
+            {
+                GenreComboBox.Items.Add(genre);
+            }
         }
 
         public async void LoadApps()
@@ -39,13 +54,26 @@ namespace SteamBibUi.AppPages
             var getAppDetails = new GetAppDetails();
             steamApps = new ObservableCollection<SteamApp>(await apiHandler.GetSteamAppsAsync());
 
+            var validApps = new List<SteamApp>();
+
             foreach (var steamApp in steamApps)
             {
-                await getAppDetails.PopulateGenresAsync(steamApp);
+                await getAppDetails.PopulateAppDataAsync(steamApp);
+
+                // Check if the AppData is valid according to your criteria
+                if (IsValidAppData(steamApp.AppData))
+                {
+                    validApps.Add(steamApp);
+
+                    // Break the loop if we have found 100 valid apps
+                    if (validApps.Count == 100)
+                    {
+                        break;
+                    }
+                }
             }
 
-            var filteredApps = steamApps.Where(steamApp => !string.IsNullOrEmpty(steamApp.Name)).ToList();
-            AppsListView.ItemsSource = new ObservableCollection<SteamApp>(filteredApps);
+            AppsListView.ItemsSource = new ObservableCollection<SteamApp>(validApps);
         }
 
         private void AppsListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -59,17 +87,80 @@ namespace SteamBibUi.AppPages
             LoadApps();
         }
 
-        public void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public async void UpdateSearch()
         {
             var searchInput = SearchTextBox.Text.ToLower();
 
-            var filteredApps = steamApps.Where(steamApp => steamApp.Name.ToLower().Contains(searchInput) && !string.IsNullOrEmpty(steamApp.Name)).ToList();
-            AppsListView.ItemsSource = filteredApps;
+            var getAppDetails = new GetAppDetails();
+
+            var filteredApps = steamApps
+                .Where(steamApp => steamApp.Name.ToLower().Contains(searchInput) && !string.IsNullOrEmpty(steamApp.Name))
+                .Take(50)
+                .ToList();
+
+            var validFilteredApps = new List<SteamApp>();
+
+            foreach (var steamApp in filteredApps)
+            {
+                await getAppDetails.PopulateAppDataAsync(steamApp);
+
+                // Check if the AppData is valid according to your criteria
+                if (IsValidAppData(steamApp.AppData))
+                {
+                    validFilteredApps.Add(steamApp);
+                }
+            }
+
+            AppsListView.ItemsSource = new ObservableCollection<SteamApp>(validFilteredApps);
         }
+
+        public async void FilterGenre()
+        {
+            var selectedGenre = (string)GenreComboBox.SelectedItem;
+            var getAppDetails = new GetAppDetails();
+
+            var filteredApps = steamApps
+                .Where(steamApp => selectedGenre != null && steamApp.AppData != null && steamApp.AppData.Genres != null && steamApp.AppData.Genres.Any(g => g.Description == selectedGenre))
+                .Take(50)
+                .ToList();
+
+            var validFilteredApps = new List<SteamApp>();
+
+            foreach (var steamApp in filteredApps)
+            {
+                await getAppDetails.PopulateAppDataAsync(steamApp);
+
+                if (IsValidAppData(steamApp.AppData))
+                {
+                    validFilteredApps.Add(steamApp);
+                }
+            }
+
+            AppsListView.ItemsSource = new ObservableCollection<SteamApp>(validFilteredApps);
+        }
+
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(DashboardPage));
+        }
+
+        private void SearchTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                UpdateSearch();
+            }
+        }
+
+        private void GenreComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterGenre();
+        }
+
+        private bool IsValidAppData(AppData appData)
+        {
+            return appData != null && !string.IsNullOrEmpty(appData.Name) && appData.Type == "game";
         }
     }
 }

@@ -49,11 +49,11 @@
                         <Image Source="{x:Bind ImageUrl}" Stretch="UniformToFill" Opacity="0.5" Grid.RowSpan="2"/>
                         <TextBlock x:Name="nameTextBlock" Text="{x:Bind Name}" Margin="0 0 0 10"/>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Genres:" Margin="0 0 0 10"/>
-                            <ItemsControl ItemsSource="{x:Bind Genres}">
+                            <TextBlock Text="Genres:" Margin="0 0 5 0"/>
+                            <ItemsControl ItemsSource="{x:Bind AppData.Genres}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding}" FontSize="16" Margin="10 0"/>
+                                        <TextBlock Text="{Binding Description}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -78,8 +78,9 @@
             </Button>
             <StackPanel Orientation="Horizontal" Padding="15">
                 <TextBlock VerticalAlignment="Center" Margin="0 0 5 0" Text="Search:"/>
-                <TextBox MinWidth="250" MaxWidth="250" TextChanged="SearchTextBox_TextChanged" x:Name="SearchTextBox"/>
+                <TextBox MinWidth="250" MaxWidth="250" KeyDown="SearchTextBox_KeyDown" x:Name="SearchTextBox"/>
             </StackPanel>
+            <ComboBox x:Name="GenreComboBox" SelectionChanged="GenreComboBox_SelectionChanged" Margin="20 0"/>
         </StackPanel>
     </Grid>
 </Page>

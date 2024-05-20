@@ -16,7 +16,7 @@ namespace SteamBibUi.Models
 
         public string ImageUrl => $"https://cdn.akamai.steamstatic.com/steam/apps/{Id}/header.jpg";
 
-        public List<string> Genres { get; set; }
+        public AppData AppData { get; set; }
     }
 
     internal class GetAppDetails
@@ -28,7 +28,7 @@ namespace SteamBibUi.Models
             _client = new HttpClient();
         }
 
-        public async Task PopulateGenresAsync(SteamApp app)
+        public async Task PopulateAppDataAsync(SteamApp app)
         {
             string url = $"https://localhost:7099/api/AppDetails/{app.Appid}";
 
@@ -47,9 +47,9 @@ namespace SteamBibUi.Models
                 if (receivedContent != null && receivedContent.ContainsKey(app.Appid.ToString()))
                 {
                     var appDetail = receivedContent[app.Appid.ToString()];
-                    if (appDetail.Data != null && appDetail.Data.Genres != null)
+                    if (appDetail.Data != null)
                     {
-                        app.Genres = appDetail.Data.Genres.Select(g => g.Description).ToList();
+                        app.AppData = appDetail.Data;
                     }
                 }
             }

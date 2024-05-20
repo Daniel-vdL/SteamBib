@@ -29,7 +29,7 @@ namespace SteamBibUi.LoginPages
             this.InitializeComponent();
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        public async void Login()
         {
             if (failedLoginAttempts >= 3 && (DateTime.Now - lastFailedLoginTime).TotalMinutes < 5)
             {
@@ -104,6 +104,20 @@ namespace SteamBibUi.LoginPages
                 {
                     this.Frame.Navigate(typeof(DashboardPage));
                 }
+            }
+        }
+
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Login();
+        }
+
+
+        private async void LoginButton_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                Login();
             }
         }
 

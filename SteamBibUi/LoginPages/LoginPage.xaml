@@ -50,7 +50,7 @@
         <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Row="0">SteamBib</TextBlock>
 
         <Border Style="{StaticResource BorderStyle}" Grid.Row="1">
-            <StackPanel>
+            <StackPanel KeyDown="LoginButton_KeyDown">
                 <TextBox Style="{StaticResource TextBoxStyle}" x:Name="UsernameTextbox" PlaceholderText="Enter your username"/>
                 <PasswordBox Background="#7289DA" Foreground="White" BorderThickness="0" x:Name="PasswordTextbox" PlaceholderText="Enter your password"/>
                 <Button Style="{StaticResource ButtonStyle}" x:Name="LoginButton" Click="LoginButton_Click" Content="Login now -->"/>
