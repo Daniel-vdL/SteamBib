@@ -1,0 +1,40 @@
+<Page
+    x:Class="SteamBibUi.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SteamBibUi"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="#7289DA"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Background="#2C2F33">
+        <NavigationView  x:Name="UserView" Visibility="Collapsed" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" ItemInvoked="NavView_ItemInvoked">
+            <NavigationView.MenuItems>
+                <Button Style="{StaticResource ButtonStyle}" Click="LogoutButton_Click" Content="LogOut" HorizontalAlignment="Right"/>
+                <NavigationViewItem Content="Home" Tag="OtherPages.DashboardPage"/>
+                <NavigationViewItem Content="Games" Tag="AppPages.AppViewPage"/>
+            </NavigationView.MenuItems>
+            <Frame x:Name="UserFrame"></Frame>
+        </NavigationView>
+
+        <NavigationView x:Name="AdminView" Visibility="Collapsed" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" ItemInvoked="NavView_ItemInvoked">
+            <NavigationView.MenuItems>
+                <Button Style="{StaticResource ButtonStyle}" Click="LogoutButton_Click" Content="LogOut" HorizontalAlignment="Right"/>
+                <NavigationViewItem Content="Home" Tag="OtherPages.DashboardPage"/>
+                <NavigationViewItem Content="Console" Tag="OtherPages.AdminConsole"/>
+                <NavigationViewItem Content="Games" Tag="AppPages.AdminAppViewPage"/>
+            </NavigationView.MenuItems>
+            <Frame x:Name="AdminFrame"></Frame>
+        </NavigationView>
+    </Grid>
+</Page>

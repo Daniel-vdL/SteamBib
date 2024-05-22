@@ -8,44 +8,26 @@
     mc:Ignorable="d"
     Background="#36393F">
 
-    <Page.Resources>
-        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="FontSize" Value="50"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#7289DA"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-        <Style x:Key="StackPanelStyle" TargetType="StackPanel">
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="100"/>
-            <Setter Property="Background" Value="#2C2F33"/>
-            <Setter Property="BorderBrush" Value="#7289DA"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="CornerRadius" Value="10"/>
-        </Style>
-        <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="CornerRadius" Value="10"/>
-            <Setter Property="MinWidth" Value="110"/>
-            <Setter Property="MaxWidth" Value="110"/>
-            <Setter Property="Background" Value="#7289DA"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-    </Page.Resources>
+    <Grid BorderThickness="0 2 0 0" BorderBrush="#7289DA">
+        <Grid Background="#36393F" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Row="0">Welcome to SteamBib!</TextBlock>
+                <Grid Grid.Row="0"></Grid>
 
-        <StackPanel Style="{StaticResource StackPanelStyle}" Grid.Row="1">
-            <StackPanel HorizontalAlignment="Center" Margin="0 10 0 10" Orientation="Horizontal">
-                <Button Style="{StaticResource ButtonStyle}" Margin="0 0 10 0" x:Name="AppPageButton" Click="AppPageButton_Click">App Page</Button>
-                <Button Style="{StaticResource ButtonStyle}" x:Name="LogoutButton" Click="LogoutButton_Click">Logout</Button>
-            </StackPanel>
-        </StackPanel>
+                <Grid Grid.Row="1"></Grid>
+            </Grid>
+
+            <Grid Grid.Column="1"></Grid>
+        </Grid>
+
     </Grid>
 </Page>

@@ -96,14 +96,7 @@ namespace SteamBibUi.LoginPages
 
                 User.CurrentUser = answerUser;
 
-                if (User.CurrentUser.StatusId == 1)
-                {
-                    this.Frame.Navigate(typeof(AdminDashboardPage));
-                }
-                else
-                {
-                    this.Frame.Navigate(typeof(DashboardPage));
-                }
+                this.Frame.Navigate(typeof(MainPage), answerUser);
             }
         }
 

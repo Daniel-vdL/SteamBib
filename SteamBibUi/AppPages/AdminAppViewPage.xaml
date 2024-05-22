@@ -10,22 +10,19 @@
     Background="#36393F">
 
     <Page.Resources>
-        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Margin" Value="0 0 0 10"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="#7289DA"/>
-            <Setter Property="CornerRadius" Value="10"/>
-            <Setter Property="Background" Value="#2C2F33"/>
-        </Style>
         <Style x:Key="StackPanelStyle" TargetType="StackPanel">
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Background" Value="#2C2F33"/>
             <Setter Property="BorderBrush" Value="#7289DA"/>
             <Setter Property="Orientation" Value="Horizontal"/>
             <Setter Property="BorderThickness" Value="0 2 0 0"/>
+        </Style>
+        <Style x:Key="StackPanelStyle2" TargetType="StackPanel">
+            <Setter Property="Margin" Value="0 0 0 10"/>
+            <Setter Property="Background" Value="#2C2F33"/>
+            <Setter Property="BorderBrush" Value="#7289DA"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="BorderThickness" Value="2"/>
         </Style>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="CornerRadius" Value="10"/>
@@ -34,25 +31,26 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid BorderThickness="0 2 0 0" BorderBrush="#7289DA">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <GridView Grid.Row="0" x:Name="AppsListView" Margin="20 20 20 0" MaxWidth="500"
-                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+        <GridView Grid.Row="0" x:Name="AppsListView" Margin="20 20 20 20" MaxWidth="500"
                   IsItemClickEnabled="True" ItemClick="AppsListView_ItemClick">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="localData:SteamApp">
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Style="{StaticResource StackPanelStyle2}" Orientation="Vertical">
                         <Image Source="{x:Bind ImageUrl}" Stretch="UniformToFill" Opacity="0.5" Grid.RowSpan="2"/>
-                        <TextBlock x:Name="nameTextBlock" Text="{x:Bind Name}" Margin="0 0 0 10"/>
-                        <Button FontSize="10" DataContext="{Binding}" x:Name="DeleteApp" Click="DeleteApp_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Delete App"/>
-                            </StackPanel>
-                        </Button>
+                        <StackPanel Margin="10" Orientation="Horizontal">
+                            <TextBlock x:Name="nameTextBlock" Text="{x:Bind Name}" Margin="0 0 5 0"/>
+                            <Button FontSize="10" DataContext="{Binding}" x:Name="DeleteApp" Click="DeleteApp_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Delete App"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

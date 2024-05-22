@@ -31,7 +31,7 @@ namespace SteamBibUi.OtherPages
 
         private void AdminConsoleButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AdminConsolePage));
+            this.Frame.Navigate(typeof(AdminConsole));
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)

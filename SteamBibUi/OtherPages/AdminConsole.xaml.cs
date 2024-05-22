@@ -19,9 +19,9 @@ using Windows.Storage;
 
 namespace SteamBibUi.OtherPages
 {
-    public sealed partial class AdminConsolePage : Page
+    public sealed partial class AdminConsole : Page
     {
-        public AdminConsolePage()
+        public AdminConsole()
         {
             this.InitializeComponent();
         }

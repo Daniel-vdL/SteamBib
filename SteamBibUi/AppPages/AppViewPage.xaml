@@ -14,7 +14,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
             <Setter Property="Margin" Value="0 0 0 10"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="#7289DA"/>
             <Setter Property="CornerRadius" Value="10"/>
@@ -34,29 +34,36 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid BorderThickness="0 2 0 0" BorderBrush="#7289DA">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <ListView Grid.Row="0" x:Name="AppsListView" Margin="20 20 20 0" MaxWidth="500"
-                  IsItemClickEnabled="True" ItemClick="AppsListView_ItemClick"
-                  ItemContainerStyle="{StaticResource ListViewItemStyle}">
+          IsItemClickEnabled="True" ItemClick="AppsListView_ItemClick"
+          ItemContainerStyle="{StaticResource ListViewItemStyle}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localData:SteamApp">
                     <StackPanel>
                         <Image Source="{x:Bind ImageUrl}" Stretch="UniformToFill" Opacity="0.5" Grid.RowSpan="2"/>
-                        <TextBlock x:Name="nameTextBlock" Text="{x:Bind Name}" Margin="0 0 0 10"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Genres:" Margin="0 0 5 0"/>
-                            <ItemsControl ItemsSource="{x:Bind AppData.Genres}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Description}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                        <StackPanel BorderBrush="#7289DA" BorderThickness="0 2 0 0">
+                            <TextBlock FontStyle="Italic" FontWeight="Bold" x:Name="nameTextBlock" Text="{x:Bind Name}" Margin="10 5 0 5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Genres:" Margin="10 0 5 5"/>
+                                <ItemsControl ItemsSource="{x:Bind AppData.Genres}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Description}" Margin="0 0 5 0"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

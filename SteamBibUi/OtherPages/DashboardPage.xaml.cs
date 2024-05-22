@@ -23,15 +23,5 @@ namespace SteamBibUi.OtherPages
         {
             this.InitializeComponent();
         }
-
-        private void AppPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(AppViewPage));
-        }
-
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(LoginPage));
-        }
     }
 }
