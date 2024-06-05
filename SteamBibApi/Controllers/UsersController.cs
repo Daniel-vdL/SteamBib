@@ -113,6 +113,7 @@ namespace SteamBibApi.Controllers
             {
                 Username = userLoginDto.Username,
                 Password = SecureHasher.Hash(userLoginDto.Password),
+                StatusId = userLoginDto.StatusId,
             };
 
             _context.Users.Add(user);

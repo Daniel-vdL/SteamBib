@@ -71,13 +71,7 @@
         </ListView>
 
         <StackPanel Style="{StaticResource StackPanelStyle}" Grid.Row="1">
-            <Button Style="{StaticResource ButtonStyle}" x:Name="ReturnButton" Click="ReturnButton_Click" Margin="20 0 10 0">
-                <StackPanel Orientation="Horizontal">
-                    <SymbolIcon Margin="0 0 5 0" Symbol="Back"/>
-                    <TextBlock Text="Go back"/>
-                </StackPanel>
-            </Button>
-            <Button Style="{StaticResource ButtonStyle}" x:Name="RefreshGames" Click="RefreshGames_Click">
+            <Button Style="{StaticResource ButtonStyle}" x:Name="RefreshGames" Margin="20 0 10 0" Click="RefreshGames_Click">
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Margin="0 0 5 0" Symbol="Refresh"/>
                     <TextBlock Text="Refresh"/>
@@ -87,7 +81,7 @@
                 <TextBlock VerticalAlignment="Center" Margin="0 0 5 0" Text="Search:"/>
                 <TextBox MinWidth="250" MaxWidth="250" KeyDown="SearchTextBox_KeyDown" x:Name="SearchTextBox"/>
             </StackPanel>
-            <ComboBox x:Name="GenreComboBox" SelectionChanged="GenreComboBox_SelectionChanged" Margin="20 0"/>
+            <ComboBox VerticalAlignment="Center" x:Name="GenreComboBox" SelectionChanged="GenreComboBox_SelectionChanged" Margin="20 0"/>
         </StackPanel>
     </Grid>
 </Page>

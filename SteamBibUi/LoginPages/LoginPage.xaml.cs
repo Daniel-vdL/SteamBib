@@ -57,7 +57,8 @@ namespace SteamBibUi.LoginPages
             var user = new User
             {
                 Username = username,
-                Password = password
+                Password = password,
+                StatusId = 0
             };
 
             var userJson = JsonSerializer.Serialize(user);

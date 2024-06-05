@@ -38,6 +38,11 @@ namespace SteamBibApi.Controllers
                 _context.SaveChanges();
             }
 
+            foreach (var item in blob)
+            {
+               
+            }
+
             return blob;
         }
     }

@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace SteamBibUi.Models
 {
     internal class ApiHandler
     {
+        private List<AppDetails> AppDetailsList;
+        public AppData appDetails { get; set; }
         private readonly HttpClient _client;
 
         public static List<AppDetails> steamAppDetails = new List<AppDetails>();

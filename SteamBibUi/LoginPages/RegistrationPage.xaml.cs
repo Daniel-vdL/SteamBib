@@ -75,7 +75,7 @@ namespace SteamBibUi.LoginPages
 
                 User.CurrentUser = answerUser;
 
-                this.Frame.Navigate(typeof(DashboardPage));
+                this.Frame.Navigate(typeof(MainPage), answerUser);
 
             }
             else
