@@ -63,8 +63,8 @@ namespace SteamBibUi.AppPages
                 {
                     validApps.Add(steamApp);
 
-                    // Break the loop if we have found 200 valid apps
-                    if (validApps.Count == 200)
+                    // Break the loop if we have found 50 valid apps
+                    if (validApps.Count == 50)
                     {
                         break;
                     }
